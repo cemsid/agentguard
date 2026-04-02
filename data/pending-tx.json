@@ -1,0 +1,8 @@
+{
+  "wallet": "my-agent",
+  "chain": "base",
+  "txHex": "REAL_SERIALIZED_TX_HEX_BURAYA",
+  "recipient": "0xTargetAddress",
+  "amount": "0.1 ETH",
+  "reason": "Hackathon demo payment"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "agentguard-solana-base-expiry",
+  "name": "AgentGuard Solana/Base scope",
+  "version": 1,
+  "created_at": "2026-04-03T00:00:00Z",
+  "rules": [
+    {
+      "type": "allowed_chains",
+      "chain_ids": [
+        "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+        "eip155:8453"
+      ]
+    },
+    {
+      "type": "expires_at",
+      "timestamp": "2026-04-06T23:59:59Z"
+    }
+  ],
+  "action": "deny"
+}

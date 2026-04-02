@@ -1,0 +1,2 @@
+{"at": "2026-04-02T20:29:12.756168+00:00", "status": "error", "message": "token file does not contain a valid ows_key_ token"}
+{"at": "2026-04-02T20:32:14.203902+00:00", "wallet": "my-agent", "chain": "base", "recipient": "0xTargetAddress", "amount": "0.1 ETH", "reason": "Hackathon demo payment", "txHex": "REAL_SERIALIZED_TX_HEX_BURAYA", "status": "rejected"}

@@ -1,0 +1,6 @@
+.venv/
+.secrets/
+__pycache__/
+*.pyc
+data/audit-log.jsonl
+data/dashboard-data.json
