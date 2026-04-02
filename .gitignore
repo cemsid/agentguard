@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 data/audit-log.jsonl
 data/dashboard-data.json
+node_modules/
+data/audit-log.backup.jsonl
