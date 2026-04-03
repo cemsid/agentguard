@@ -13,7 +13,7 @@ DATA_PATH = Path("/opt/agentguard/data/dashboard-data.json")
 EVM_ADDRESS   = "0x398F62F487a9138398B5fdE08e07beBA8698E804"
 SEPOLIA_RPC   = "https://ethereum-sepolia-rpc.publicnode.com"
 ETHERSCAN_API = "https://api.etherscan.io/v2/api"
-ETHERSCAN_KEY = "VCJAD8C42R9FD6V7MN4UHU4UIFN39PZRDY"
+ETHERSCAN_KEY = "YOUR_ETHERSCAN_API_KEY_HERE"
 
 @st.cache_data(ttl=60)
 def fetch_sepolia_data():
