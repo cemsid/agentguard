@@ -6,3 +6,8 @@ data/audit-log.jsonl
 data/dashboard-data.json
 node_modules/
 data/audit-log.backup.jsonl
+data/streamlit.log
+data/tx.log
+data/loop.log
+data/audit-log.backup2.jsonl
+dashboard-data.json
