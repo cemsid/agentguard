@@ -28,7 +28,7 @@ def fetch_sepolia_data():
         r = requests.get(ETHERSCAN_API, params={
             "module":"account","action":"txlist","address":EVM_ADDRESS,
             "startblock":0,"endblock":99999999,"sort":"desc",
-            "apikey":ETHERSCAN_KEY,"offset":50,"page":1,"chainid":"11155111"
+            "apikey":ETHERSCAN_KEY,"offset":10000,"page":1,"chainid":"11155111"
         }, timeout=10)
         d = r.json()
         if d.get("status")=="1":
@@ -67,9 +67,16 @@ def load_data():
     sepolia = fetch_sepolia_data()
     if sepolia["transactions"]:
         real_rows = build_audit_log(sepolia["transactions"])
-        data["auditLog"] = real_rows
-        score,succ,rej,fail = compute_trust_score(real_rows)
-        data["trustScore"] = {"score":score,"successfulTx":succ,"rejectedTx":rej,"failedTx":fail}
+        # Ayrı dosyadaki rejected'ları da ekle
+        import json as _json
+        from pathlib import Path as _Path
+        rej_file = _Path("/opt/agentguard/data/rejected-log.json")
+        rejected_rows = _json.loads(rej_file.read_text()) if rej_file.exists() else []
+        combined = real_rows + rejected_rows
+        combined.sort(key=lambda x: x["at"], reverse=True)
+        data["auditLog"] = combined
+        score, succ, rej, fail = compute_trust_score(combined)
+        data["trustScore"] = {"score": score, "successfulTx": succ, "rejectedTx": rej, "failedTx": fail}
     else:
         t = data.setdefault("trustScore",{})
         succ=int(t.get("successfulTx",0)); rej=int(t.get("rejectedTx",0)); fail=int(t.get("failedTx",0))
@@ -495,8 +502,8 @@ def render_audit_log(audit_rows):
         at   = row.get("at","")[:19].replace("T"," ")
         rcpt = row.get("recipient","-")
         rcpt_s = rcpt[:10]+"…"+rcpt[-6:] if len(rcpt)>20 else rcpt
-        txh  = row.get("txHash","")
-        txh_s= txh[:8]+"…"+txh[-6:] if len(txh)>18 else txh
+        txh  = row.get("txHash","") or ""
+        txh_s= txh[:8]+"…"+txh[-6:] if len(txh)>18 else (txh if txh else "—")
         txh_url = f"https://sepolia.etherscan.io/tx/{txh}" if txh else "#"
         amt  = row.get("amount","-")
         rsn  = row.get("reason","-")[:28]
